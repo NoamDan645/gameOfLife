@@ -1,0 +1,13 @@
+*
+!/**/
+
+!*.c
+!.gitignore
+![mM]ake*
+!*.h
+!*.cpp
+!*.hpp
+!*.md
+!*.mak
+
+
