@@ -8,6 +8,7 @@ typedef void (*func)(int **board, int row, int col);
 
 func lut[2][9];
 
+
 int **BoardCreate(int row, int col);
 void initLut();
 void GetRandom(int **board, int n, int m);
@@ -19,7 +20,6 @@ int IsAlive(int **board, int x, int y);
 int CountNeb(int **board, int n, int m, int rows, int cols);
 void Play(int **board_a, int **board_b, int n, int m);
 
-
 int main(int argc, char **argv)
 {
     int row = 2;
@@ -27,12 +27,13 @@ int main(int argc, char **argv)
 
     int **board1 = BoardCreate(row, col);
     int **board2 = BoardCreate(row, col);
-    
+
     initLut();
 
-    GetRandom(board1,row,col);
-    Play(board1,board2,row,col);
-
+    GetRandom(board1, row, col);
+    PrintBoard(board1, row, col);
+     /*Play(board1, board2, row, col);
+*/
     return 0;
 }
 
@@ -84,15 +85,16 @@ void SwapBoards(int ***board_a, int ***board_b)
 }
 void TurnOn(int **board, int row, int col)
 {
-    board[row][col] == 1;
+    board[row][col] = 1;
 }
 void TurnOff(int **board, int row, int col)
 {
-    board[row][col] == 0;
+    board[row][col] = 0;
 }
 void GetRandom(int **board, int n, int m)
 {
     int i = 0, j = 0;
+
     for (i = 0; i < n; i++)
     {
         for (j = 0; j < m; ++j)
@@ -115,7 +117,7 @@ void PrintBoard(int **board, int rows, int cols)
     {
         for (j = 0; j < cols; ++j)
         {
-            if(1==IsAlive(board,i,j))
+            if (1 == IsAlive(board, i, j))
             {
                 printf(" * ");
             }
@@ -158,8 +160,6 @@ void Play(int **boardIn, int **boardOut, int row, int col)
                 lut[IsAlive(boardIn, i, j)][count](boardOut, i, j);
             }
             PrintBoard(boardIn, row, col);
-
-
         }
 
         SwapBoards(&boardIn, &boardOut);
